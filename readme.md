@@ -12,7 +12,7 @@ return array(
 );
 ```
 
-* Start logging anywhere in your code: `Loggy::connect();`.
+* Start logging anywhere in your code: `Loggy::start();`.
 PHP native errors and exceptions will be logged automatically.
 * To log custom errors: `Loggy::log($data);`.
 * The time and memory monitoring will automatically stop at end end of your script execution.

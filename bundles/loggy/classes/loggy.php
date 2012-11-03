@@ -4,7 +4,7 @@ class Loggy {
 
 	private static $logger;
 	
-	public static function connect()
+	public static function start()
 	{
 		static::$logger = Remote_Logger::start(
 			Config('loggy::config.api_endpoint'),
