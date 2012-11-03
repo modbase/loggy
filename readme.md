@@ -14,7 +14,7 @@ return array(
 
 * Start logging anywhere in your code: `Loggy::connect();`.
 PHP native errors and exceptions will be logged automatically.
-*To log custom errors: `Loggy::log($data);`.
+* To log custom errors: `Loggy::log($data);`.
 * The time and memory monitoring will automatically stop at end end of your script execution.
 If needed, you can stop the monitoring anywhere yourself: `Ĺoggy::end();`.
 * The remote error logging can be stopped (reset old error handlers) by using: `Loggy::reset();`.
