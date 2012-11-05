@@ -57,12 +57,12 @@ class Loggy {
 	{
 		$log = array(
 			'msg' => static::getPrefix($exception->getCode()) . ' '. $exception->getMessage(),
+			'site_id' => Config::get('loggy::config.site_id'),
+			'code' => $exception->getCode(),
 			'line' => $exception->getLine(),
 			'file' => $exception->getFile(),
 			'trace' => $exception->getTraceAsString()
 		);
-
-		//File::append('error.log', json_encode($log));
 
 		if (static::$curl != null)
 		{
