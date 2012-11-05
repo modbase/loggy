@@ -19,7 +19,7 @@ Now Loggy will do a `POST` request to your API endpoint (see configuration below
 
 ```
 {
-	"msg": "<strong>NOTICE<\/strong> Undefined variable: test",
+	"msg": "<strong>NOTICE</strong> Undefined variable: test",
 	"line": 123,
 	"file": "/var/www/test/test.php",
 	"trace": "full trace here..."
