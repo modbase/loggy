@@ -2,40 +2,71 @@
 
 class Loggy {
 
-	private static $logger;
-	
-	public static function start()
+	private static $curl;
+
+	public static $ERROR_CODE = array(
+        E_ERROR             => 'ERROR',
+        E_RECOVERABLE_ERROR => 'RECOVERABLE_ERROR',
+        E_WARNING           => 'WARNING',
+        E_PARSE             => 'PARSE',
+        E_NOTICE            => 'NOTICE',
+        E_STRICT            => 'STRICT',
+        E_DEPRECATED        => 'DEPRECATED',
+        E_CORE_ERROR        => 'CORE_ERROR',
+        E_CORE_WARNING      => 'CORE_WARNING',
+        E_COMPILE_ERROR     => 'COMPILE_ERROR',
+        E_COMPILE_WARNING   => 'COMPILE_WARNING',
+        E_USER_ERROR        => 'USER_ERROR',
+        E_USER_WARNING      => 'USER_WARNING',
+        E_USER_NOTICE       => 'USER_NOTICE',
+        E_USER_DEPRECATED   => 'USER_DEPRECATED',
+    );
+
+	public static function init()
 	{
-		static::$logger = Remote_Logger::start(
-			Config('loggy::config.api_endpoint'),
-			Config('loggy::config.log_errors'),
-			Config('loggy::config.log_exceptions'),
-			Config('loggy::config.log_mem'),
-			Config('loggy::config.log_time')
+		static::$curl = new Curl();
+	}
+
+	private static function getPrefix($code)
+	{
+		$prefix = '<strong>';
+
+		switch($code)
+		{
+			case E_ERROR:
+				$prefix .= 'FATAL';
+				break;
+			case E_WARNING:
+				$prefix .= 'WARNING';
+				break;
+			case E_NOTICE:
+				$prefix .= 'NOTICE';
+				break;
+			default:
+				$prefix .= 'ERROR';
+				break;
+		}
+
+		$prefix .= '</strong>';
+
+		return $prefix;
+	}
+
+
+	public static function log($exception)
+	{
+		$log = array(
+			'msg' => static::getPrefix($exception->getCode()) . ' '. $exception->getMessage(),
+			'line' => $exception->getLine(),
+			'file' => $exception->getFile(),
+			'trace' => $exception->getTraceAsString()
 		);
-	}
 
-	public static function log($data)
-	{
-		if ($logger != null)
-		{
-			static::$logger->log($data);
-		}
-	}
+		//File::append('error.log', json_encode($log));
 
-	public static function end()
-	{
-		if ($logger != null)
+		if (static::$curl != null)
 		{
-			static::$logger->end();
-		}
-	}
-
-	public static function reset()
-	{
-		if ($logger != null)
-		{
-			static::$logger->reset();
+			static::$curl->simple_post(Config::get('loggy::config.api_endpoint'), json_encode($log));
 		}
 	}
 }
