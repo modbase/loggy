@@ -5,7 +5,7 @@ Loggy is a remote error logger/forwarder for custom and native PHP errors. You c
 
 ## Configuration
 
-The configuration of this bundle is available at: `bundles/loggy/config/config.php`:
+The configuration of this bundle is available at: `config/config.php`:
 
 ```
 return array(
@@ -45,5 +45,4 @@ The message is formatted as JSON and has the following structure:
 }
 ```
 
-You can do whatever you want at the API side, for example save it in a database and show it in your internal error dashboard. I might publish my own dashboard on GitHub soon too.
-
+You can do whatever you want at the API side, for example save it in a database and show it in your internal error dashboard. Take a look at my _loggy-dashboard_ repo for an example.
