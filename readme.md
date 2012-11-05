@@ -13,7 +13,7 @@ return array(
 ```
 
 In your `application/config/error.php` set the `log` option to `true`.
-The in the `logger` closure, add: `Loggy::log($exception);`.
+Then in the `logger` closure, add: `Loggy::log($exception);`.
 
 Now Loggy will do a `POST` request to your API endpoint (see configuration below) when an error occurs. The message is formatted as JSON and has the following structure:
 
