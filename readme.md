@@ -30,7 +30,7 @@ The message is formatted as JSON and has the following structure:
 }
 ```
 
-Can you whatever you want at the API side, for example save it in a database and show it in your internal error dashboard. I might publish my own dashboard on GitHub soon too.
+You can do whatever you want at the API side, for example save it in a database and show it in your internal error dashboard. I might publish my own dashboard on GitHub soon too.
 
 ## Configuration
 
